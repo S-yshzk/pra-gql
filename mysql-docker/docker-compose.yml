@@ -1,18 +1,29 @@
+# docker-compose.yml
+
 services:
-  mysql: # ← これがサービス名
-    image: mysql:latest
+  mysql:
+    # ★★★ 安定版のイメージを指定することを強く推奨します ★★★
+    image: mysql:8.0
     container_name: mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: sakila
-      MYSQL_USER: myappuser # ★追加: 一般ユーザー名
-      MYSQL_PASSWORD: myapppassword # ★追加: 一般ユーザーのパスワード (適切なパスワードに変更してください)
+      MYSQL_USER: myappuser
+      MYSQL_PASSWORD: myapppassword
       TZ: "Asia/Tokyo"
+
     volumes:
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
       - ./init:/docker-entrypoint-initdb.d
+      # ★★★ ここを追加: logsディレクトリをコンテナの/var/log/mysqlにマウント ★★★
+      - ./logs:/var/log/mysql
+
     ports:
       - "3306:3306"
+
     command:
       - --general-log=1
       - --log-output=FILE
+      # ★★★ ここを追加: ログファイルのパスを明示的に指定 ★★★
+      - --general-log-file=/var/log/mysql/general.log
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci

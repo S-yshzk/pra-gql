@@ -8,23 +8,17 @@ import { prisma } from "./prisma"; // Prisma Clientインスタンス
 import { createContext } from "./context"; // コンテキスト生成関数
 
 // --- typegraphql-prisma によって生成されたリゾルバをインポート ---
-import {
-  FindManyActorResolver, // 全てのActorを取得する機能を提供
-  // 必要に応じて他のリゾルバもインポート:
-  // FindUniqueActorResolver, // 特定のActorを取得
-  // ActorCrudResolver,       // ActorのCRUD操作全般
-  // ActorRelationsResolver,  // Actorのリレーション解決
-  ActorRelationsResolver,
-  FilmCrudResolver,
-  FindUniqueFilmOrThrowResolver,
-  FindUniqueFilmOrThrowArgs,
-  Film_actor,
-} from "./generated/typegraphql-prisma"; // 生成されたindexファイルから
+import { resolvers } from "./generated/typegraphql-prisma"; // 生成されたindexファイルから
 import gql from "graphql-tag";
 import { PrismaClient } from "@prisma/client";
 
 // カスタムリゾルバがあればそれもインポート
 // import { MyCustomActorResolver } from './resolvers/MyCustomActorResolver';
+
+// コンテキストの型を定義（推奨）
+interface Context {
+  prisma: PrismaClient;
+}
 
 const typeDefs = gql`
   input UserFilter {
@@ -81,49 +75,54 @@ const typeDefs = gql`
 `;
 
 // A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => "world",
-    user: (parent: any, args: { userId: number }) => {
-      return users.find((u) => u.userId === args.userId);
-    },
-    // posts: () => posts,
-    users: () => users,
-    actors: async (parent: any, arg: any, context: any) => {
-      const { prisma } = context;
-      console.log(arg);
-      return prisma.actor.findMany({ where: { actor_id: arg.actor_id } });
-    },
-    films: (parent: any, arg: any, context: any) => {
-      const { prisma } = context;
-      if (arg) {
-        return prisma.film.findMany({ where: { film_id: arg.film_id } });
-      } else {
-        return prisma.film.findMany();
-      }
-    },
-  },
-  User: {
-    posts: (parent: { userId: number }) => {
-      return posts.filter((post) => post.userId === parent.userId);
-    },
-  },
-  Actor: {
-    film_actors: async (parent: any, arg: any, context: any) => {
-      const { prisma } = context;
-      console.log(parent);
-      return prisma.film_actor.findMany();
-    },
-  },
-  Film: {
-    film_actors: async (parent: any, arg: any, context: any) => {
-      const { prisma } = context;
-      console.log(parent);
-      return prisma.film_actor.findMany({ where: { film_id: parent.film_id } });
-    },
-  },
-  Film_actor: {},
-};
+// const resolvers = {
+//   Query: {
+//     hello: () => "world",
+//     user: (parent: any, args: { userId: number }) => {
+//       return users.find((u) => u.userId === args.userId);
+//     },
+//     // posts: () => posts,
+//     users: () => users,
+//     actors: async (parent: any, arg: any, context: any) => {
+//       const { prisma } = context;
+//       console.log(arg);
+//       return prisma.actor.findMany({ where: { actor_id: arg.actor_id } });
+//     },
+//     films: (parent: any, arg: any, context: any) => {
+//       const { prisma } = context;
+//       if (arg) {
+//         return prisma.film.findMany({ where: { film_id: arg.film_id } });
+//       } else {
+//         return prisma.film.findMany();
+//       }
+//     },
+//   },
+//   User: {
+//     posts: (parent: { userId: number }) => {
+//       return posts.filter((post) => post.userId === parent.userId);
+//     },
+//   },
+//   Actor: {
+//     film_actors: async (parent: any, arg: any, context: any) => {
+//       const { prisma } = context;
+//       console.log(parent);
+//       return prisma.film_actor.findMany();
+//     },
+//   },
+//   Film: {
+//     film_actors: async (parent: any, arg: any, context: any) => {
+//       const { prisma } = context;
+//       console.log(parent);
+//       return prisma.film_actor.findMany({ where: { film_id: parent.film_id } });
+//     },
+//   },
+//   Film_actor: {
+//     actor: async (parent: any, arg: any, context: any) => {
+//       const { prisma } = context;
+//       return prisma.actor.findUnique({ where: { actor_id: parent.actor_id } });
+//     },
+//   },
+// };
 
 const users = [
   { name: "Sample User1", age: 20, userId: 1 },
@@ -141,30 +140,34 @@ const posts = [
 
 async function main() {
   // 使用するリゾルバのリスト
-  const resolversToUse: NonEmptyArray<Function> = [
-    FindManyActorResolver,
-    ActorRelationsResolver,
-    FindUniqueFilmOrThrowResolver,
-    // MyCustomActorResolver, // カスタムリゾルバもここに追加
-  ];
+  // const resolversToUse: NonEmptyArray<Function> = [
+  //   FindManyActorResolver,
+  //   ActorRelationsResolver,
+  //   FindUniqueFilmOrThrowResolver,
+  //   // MyCustomActorResolver, // カスタムリゾルバもここに追加
+  // ];
 
   // GraphQLスキーマをビルド
   const schema = await buildSchema({
-    resolvers: resolversToUse,
+    resolvers: resolvers,
     validate: false,
     emitSchemaFile: "./schema.graphql", // スキーマファイルを出力する場合
   });
-
+  const prisma = new PrismaClient();
   // Apollo Serverのインスタンスを作成
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
   });
 
   // サーバーを起動
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async ({ req, res }) => createContext(),
+    context: async ({ req }) => {
+      // ここでリクエストごとのコンテキストを生成する
+      return {
+        prisma,
+      };
+    },
   });
 
   console.log(`🚀 Server ready at ${url}`);

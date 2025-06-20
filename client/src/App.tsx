@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { gql, useLazyQuery } from "@apollo/client";
-
+import { GET_FILM_ACTOS } from "./graphql/query";
 type actor = {
   actor_id: number;
   first_name: string;
@@ -15,61 +15,30 @@ type film = {
 // GraphQLクエリをサーバーのスキーマに合わせて修正
 const GET_ACTORS = gql`
   query {
-    # hello
-    # user(userId: 1) {
-    #   name
-    #   age
-    #   userId
-    #   posts {
-    #     userId
-    #     discription
-    #     postId
-    #   }
-    # }
-    users {
-      name
-      age
-      userId
-      posts {
-        userId
-        discription
-        postId
-      }
-    }
-    films(film_id: 1) {
+    films(where: { film_id: { equals: 1 } }) {
+      # <--- このように修正する
       description
       film_id
       title
-      film_actors {
+      film_actor {
         film_id
         actor_id
+        actor {
+          actor_id
+          first_name
+          last_name
+        }
       }
     }
-    # actors {
-    #   actor_id
-    #   first_name
-    #   last_name
-    #   film_id
-    #   # film_actors {
-    #   #   actor_id
-    #   #   film_id
-    #   # }
-    # }
   }
-  # actors {
-  #   # サーバー側のFindManyActorResolverが提供するクエリ名
-  #   actor_id # ActorモデルのGraphQL型で定義されたフィールド
-  #   first_name
-  #   last_name
-  #   # last_update # 必要であれば他のフィールドも指定
-  # }
 `;
 
 function App() {
   // ApolloProvider内部でフックを使うためコンポーネントを分割
   // useLazyQueryのクエリとコールバックを修正
-  const [getActors, { loading, error, data }] = useLazyQuery(GET_ACTORS, {
+  const [getActors, { loading, error, data }] = useLazyQuery(GET_FILM_ACTOS, {
     // variables: { userId: 1 },
+    operattionName:"getFilmActorInfo"
     // fetchPolicy: "no-cache", // キャッシュを無効化
     onCompleted: (fetchedData) => {
       console.log("Actors fetched:", fetchedData);
@@ -78,7 +47,10 @@ function App() {
       console.error("Error fetching actors:", fetchError);
     },
   });
-
+  const [filmId, setFilmId] = useState(0)
+  const handleValue = ((e:any) => {
+    setValue(e.target.value);
+  })
   // useEffectを使ってコンポーネントマウント時に一度だけデータを取得する例 (ボタンクリックでも良い)
   // useEffect(() => {
   //   getActors();
@@ -90,7 +62,12 @@ function App() {
   return (
     <div>
       <h1>Apollo Client - Actors</h1>
-      <button onClick={() => getActors()}>Fetch Actors</button>{" "}
+      <input
+      type="number"
+        value={filmId}
+        onChange={(e) => handleValue(e)}
+      ></input>
+      <button onClick={() => getActors(filmId)}>Fetch Actors</button>{" "}
       {/* ボタンにテキストを追加 */}
       {/* 取得したデータを表示 */}
       {data && data.actors && (
