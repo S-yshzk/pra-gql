@@ -1,0 +1,14 @@
+export { AggregateFilm_categoryArgs } from "./AggregateFilm_categoryArgs";
+export { CreateManyFilm_categoryArgs } from "./CreateManyFilm_categoryArgs";
+export { CreateOneFilm_categoryArgs } from "./CreateOneFilm_categoryArgs";
+export { DeleteManyFilm_categoryArgs } from "./DeleteManyFilm_categoryArgs";
+export { DeleteOneFilm_categoryArgs } from "./DeleteOneFilm_categoryArgs";
+export { FindFirstFilm_categoryArgs } from "./FindFirstFilm_categoryArgs";
+export { FindFirstFilm_categoryOrThrowArgs } from "./FindFirstFilm_categoryOrThrowArgs";
+export { FindManyFilm_categoryArgs } from "./FindManyFilm_categoryArgs";
+export { FindUniqueFilm_categoryArgs } from "./FindUniqueFilm_categoryArgs";
+export { FindUniqueFilm_categoryOrThrowArgs } from "./FindUniqueFilm_categoryOrThrowArgs";
+export { GroupByFilm_categoryArgs } from "./GroupByFilm_categoryArgs";
+export { UpdateManyFilm_categoryArgs } from "./UpdateManyFilm_categoryArgs";
+export { UpdateOneFilm_categoryArgs } from "./UpdateOneFilm_categoryArgs";
+export { UpsertOneFilm_categoryArgs } from "./UpsertOneFilm_categoryArgs";

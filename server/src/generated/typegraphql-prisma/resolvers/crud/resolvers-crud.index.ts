@@ -1,0 +1,16 @@
+export { ActorCrudResolver } from "./Actor/ActorCrudResolver";
+export { AddressCrudResolver } from "./Address/AddressCrudResolver";
+export { CategoryCrudResolver } from "./Category/CategoryCrudResolver";
+export { CityCrudResolver } from "./City/CityCrudResolver";
+export { CountryCrudResolver } from "./Country/CountryCrudResolver";
+export { CustomerCrudResolver } from "./Customer/CustomerCrudResolver";
+export { FilmCrudResolver } from "./Film/FilmCrudResolver";
+export { Film_actorCrudResolver } from "./Film_actor/Film_actorCrudResolver";
+export { Film_categoryCrudResolver } from "./Film_category/Film_categoryCrudResolver";
+export { Film_textCrudResolver } from "./Film_text/Film_textCrudResolver";
+export { InventoryCrudResolver } from "./Inventory/InventoryCrudResolver";
+export { LanguageCrudResolver } from "./Language/LanguageCrudResolver";
+export { PaymentCrudResolver } from "./Payment/PaymentCrudResolver";
+export { RentalCrudResolver } from "./Rental/RentalCrudResolver";
+export { StaffCrudResolver } from "./Staff/StaffCrudResolver";
+export { StoreCrudResolver } from "./Store/StoreCrudResolver";

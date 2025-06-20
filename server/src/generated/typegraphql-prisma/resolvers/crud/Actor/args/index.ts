@@ -1,0 +1,14 @@
+export { AggregateActorArgs } from "./AggregateActorArgs";
+export { CreateManyActorArgs } from "./CreateManyActorArgs";
+export { CreateOneActorArgs } from "./CreateOneActorArgs";
+export { DeleteManyActorArgs } from "./DeleteManyActorArgs";
+export { DeleteOneActorArgs } from "./DeleteOneActorArgs";
+export { FindFirstActorArgs } from "./FindFirstActorArgs";
+export { FindFirstActorOrThrowArgs } from "./FindFirstActorOrThrowArgs";
+export { FindManyActorArgs } from "./FindManyActorArgs";
+export { FindUniqueActorArgs } from "./FindUniqueActorArgs";
+export { FindUniqueActorOrThrowArgs } from "./FindUniqueActorOrThrowArgs";
+export { GroupByActorArgs } from "./GroupByActorArgs";
+export { UpdateManyActorArgs } from "./UpdateManyActorArgs";
+export { UpdateOneActorArgs } from "./UpdateOneActorArgs";
+export { UpsertOneActorArgs } from "./UpsertOneActorArgs";

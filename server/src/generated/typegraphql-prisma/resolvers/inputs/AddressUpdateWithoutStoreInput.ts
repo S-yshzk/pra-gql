@@ -1,0 +1,58 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { CityUpdateOneRequiredWithoutAddressNestedInput } from "../inputs/CityUpdateOneRequiredWithoutAddressNestedInput";
+import { CustomerUpdateManyWithoutAddressNestedInput } from "../inputs/CustomerUpdateManyWithoutAddressNestedInput";
+import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
+import { StaffUpdateManyWithoutAddressNestedInput } from "../inputs/StaffUpdateManyWithoutAddressNestedInput";
+import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+
+@TypeGraphQL.InputType("AddressUpdateWithoutStoreInput", {})
+export class AddressUpdateWithoutStoreInput {
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  address?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  address2?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  district?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  postal_code?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  phone?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  last_update?: DateTimeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => CityUpdateOneRequiredWithoutAddressNestedInput, {
+    nullable: true
+  })
+  city?: CityUpdateOneRequiredWithoutAddressNestedInput | undefined;
+
+  @TypeGraphQL.Field(_type => CustomerUpdateManyWithoutAddressNestedInput, {
+    nullable: true
+  })
+  customer?: CustomerUpdateManyWithoutAddressNestedInput | undefined;
+
+  @TypeGraphQL.Field(_type => StaffUpdateManyWithoutAddressNestedInput, {
+    nullable: true
+  })
+  staff?: StaffUpdateManyWithoutAddressNestedInput | undefined;
+}

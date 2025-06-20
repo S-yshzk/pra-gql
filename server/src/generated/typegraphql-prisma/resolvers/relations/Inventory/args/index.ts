@@ -1,0 +1,1 @@
+export { InventoryRentalArgs } from "./InventoryRentalArgs";

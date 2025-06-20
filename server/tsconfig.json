@@ -1,0 +1,23 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "module": "CommonJS", // コマンドラインで指定していたもの
+    "target": "ES2020", // Node.jsのバージョンに合わせて調整 (例: ES2020, ES2021など)
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true, // CommonJS と ES Modules の相互運用性を向上
+    "strict": true, // 型チェックを厳格に
+    "skipLibCheck": true, // 依存ライブラリの型チェックをスキップ (ビルド高速化)
+    "resolveJsonModule": true, // JSONファイルのインポートを許可
+    "outDir": "./dist", // (もしコンパイル結果を出力する場合)
+    "rootDir": "./src" // ソースファイルのルートディレクトリ
+    // 必要に応じて他のオプションを追加
+  },
+  "include": [
+    "src/**/*.ts" // コンパイル対象のファイル
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts" // テストファイルを除外
+  ]
+}

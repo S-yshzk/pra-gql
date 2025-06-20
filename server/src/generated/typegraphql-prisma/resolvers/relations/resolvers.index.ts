@@ -1,0 +1,15 @@
+export { ActorRelationsResolver } from "./Actor/ActorRelationsResolver";
+export { AddressRelationsResolver } from "./Address/AddressRelationsResolver";
+export { CategoryRelationsResolver } from "./Category/CategoryRelationsResolver";
+export { CityRelationsResolver } from "./City/CityRelationsResolver";
+export { CountryRelationsResolver } from "./Country/CountryRelationsResolver";
+export { CustomerRelationsResolver } from "./Customer/CustomerRelationsResolver";
+export { FilmRelationsResolver } from "./Film/FilmRelationsResolver";
+export { Film_actorRelationsResolver } from "./Film_actor/Film_actorRelationsResolver";
+export { Film_categoryRelationsResolver } from "./Film_category/Film_categoryRelationsResolver";
+export { InventoryRelationsResolver } from "./Inventory/InventoryRelationsResolver";
+export { LanguageRelationsResolver } from "./Language/LanguageRelationsResolver";
+export { PaymentRelationsResolver } from "./Payment/PaymentRelationsResolver";
+export { RentalRelationsResolver } from "./Rental/RentalRelationsResolver";
+export { StaffRelationsResolver } from "./Staff/StaffRelationsResolver";
+export { StoreRelationsResolver } from "./Store/StoreRelationsResolver";

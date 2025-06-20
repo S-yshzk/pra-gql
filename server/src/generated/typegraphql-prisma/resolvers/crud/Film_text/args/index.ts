@@ -1,0 +1,14 @@
+export { AggregateFilm_textArgs } from "./AggregateFilm_textArgs";
+export { CreateManyFilm_textArgs } from "./CreateManyFilm_textArgs";
+export { CreateOneFilm_textArgs } from "./CreateOneFilm_textArgs";
+export { DeleteManyFilm_textArgs } from "./DeleteManyFilm_textArgs";
+export { DeleteOneFilm_textArgs } from "./DeleteOneFilm_textArgs";
+export { FindFirstFilm_textArgs } from "./FindFirstFilm_textArgs";
+export { FindFirstFilm_textOrThrowArgs } from "./FindFirstFilm_textOrThrowArgs";
+export { FindManyFilm_textArgs } from "./FindManyFilm_textArgs";
+export { FindUniqueFilm_textArgs } from "./FindUniqueFilm_textArgs";
+export { FindUniqueFilm_textOrThrowArgs } from "./FindUniqueFilm_textOrThrowArgs";
+export { GroupByFilm_textArgs } from "./GroupByFilm_textArgs";
+export { UpdateManyFilm_textArgs } from "./UpdateManyFilm_textArgs";
+export { UpdateOneFilm_textArgs } from "./UpdateOneFilm_textArgs";
+export { UpsertOneFilm_textArgs } from "./UpsertOneFilm_textArgs";

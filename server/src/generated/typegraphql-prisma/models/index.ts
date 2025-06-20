@@ -1,0 +1,16 @@
+export { Actor } from "./Actor";
+export { Address } from "./Address";
+export { Category } from "./Category";
+export { City } from "./City";
+export { Country } from "./Country";
+export { Customer } from "./Customer";
+export { Film } from "./Film";
+export { Film_actor } from "./Film_actor";
+export { Film_category } from "./Film_category";
+export { Film_text } from "./Film_text";
+export { Inventory } from "./Inventory";
+export { Language } from "./Language";
+export { Payment } from "./Payment";
+export { Rental } from "./Rental";
+export { Staff } from "./Staff";
+export { Store } from "./Store";

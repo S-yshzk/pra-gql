@@ -1,0 +1,18 @@
+services:
+  mysql: # ← これがサービス名
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sakila
+      MYSQL_USER: myappuser # ★追加: 一般ユーザー名
+      MYSQL_PASSWORD: myapppassword # ★追加: 一般ユーザーのパスワード (適切なパスワードに変更してください)
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    command:
+      - --general-log=1
+      - --log-output=FILE

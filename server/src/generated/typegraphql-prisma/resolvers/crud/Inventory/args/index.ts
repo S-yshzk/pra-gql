@@ -1,0 +1,14 @@
+export { AggregateInventoryArgs } from "./AggregateInventoryArgs";
+export { CreateManyInventoryArgs } from "./CreateManyInventoryArgs";
+export { CreateOneInventoryArgs } from "./CreateOneInventoryArgs";
+export { DeleteManyInventoryArgs } from "./DeleteManyInventoryArgs";
+export { DeleteOneInventoryArgs } from "./DeleteOneInventoryArgs";
+export { FindFirstInventoryArgs } from "./FindFirstInventoryArgs";
+export { FindFirstInventoryOrThrowArgs } from "./FindFirstInventoryOrThrowArgs";
+export { FindManyInventoryArgs } from "./FindManyInventoryArgs";
+export { FindUniqueInventoryArgs } from "./FindUniqueInventoryArgs";
+export { FindUniqueInventoryOrThrowArgs } from "./FindUniqueInventoryOrThrowArgs";
+export { GroupByInventoryArgs } from "./GroupByInventoryArgs";
+export { UpdateManyInventoryArgs } from "./UpdateManyInventoryArgs";
+export { UpdateOneInventoryArgs } from "./UpdateOneInventoryArgs";
+export { UpsertOneInventoryArgs } from "./UpsertOneInventoryArgs";

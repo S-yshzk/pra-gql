@@ -1,0 +1,22 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+
+@TypeGraphQL.InputType("Film_actorCreateManyInput", {})
+export class Film_actorCreateManyInput {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  actor_id!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  film_id!: number;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: true
+  })
+  last_update?: Date | undefined;
+}
