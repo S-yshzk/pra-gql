@@ -18,3 +18,13 @@ export const GET_FILM_ACTOS = gql`
     }
   }
 `;
+
+export const GET_ACTOR = gql`
+  query getActor($actorId: Int!) {
+    actor(where: { actor_id: $actorId }) {
+      actor_id
+      first_name
+      last_name
+    }
+  }
+`;
